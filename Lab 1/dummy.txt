@@ -1,0 +1,7 @@
+calculator
+
+a = 7 + 9
+
+b = 4 - 3
+
+c = a * b / 4
