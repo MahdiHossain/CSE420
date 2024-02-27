@@ -36,10 +36,12 @@ float_ [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?*
 /* write regular expressions for operators */
 
 addop [+-]
+mulop [*/%]
 incop ("++"|"--")
 relop (>)|(<)|(!=)|(<>|<=|>=)|(==)
 assignop [=]
 logicop ("&&"|"||")
+not ["!"]
 lparen ["("]
 rparen [")"]
 lcurl ["{"]
@@ -54,39 +56,95 @@ semicolon [";"]
 
 %%
 
+if { 
+    loglist="Line no "+to_string(lines)+": Token <IF> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-if {
-			loglist="Line no "+to_string(lines)+": Token <IF> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
+for { 
+    loglist="Line no "+to_string(lines)+": Token <FOR> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-while {
-			loglist="Line no "+to_string(lines)+": Token <WHILE> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
+do { 
+    loglist="Line no "+to_string(lines)+": Token <DO> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-else {
-			loglist="Line no "+to_string(lines)+": Token <ELSE> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
+int { 
+    loglist="Line no "+to_string(lines)+": Token <INT> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-int {
-			loglist="Line no "+to_string(lines)+": Token <INT> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
+float { 
+    loglist="Line no "+to_string(lines)+": Token <FLOAT> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-float {
-			loglist="Line no "+to_string(lines)+": Token <FLOAT> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
+void { 
+    loglist="Line no "+to_string(lines)+": Token <VOID> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
-printf {
-			loglist="Line no "+to_string(lines)+": Token <PRINTF> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;
-		}
-return {
-			loglist="Line no "+to_string(lines)+": Token <RETURN> Lexeme "+yytext+" found"+"\n"+"\n";
-			yyoutlog<<loglist;}
+switch { 
+    loglist="Line no "+to_string(lines)+": Token <SWITCH> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+default { 
+    loglist="Line no "+to_string(lines)+": Token <DEFAULT> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+goto { 
+    loglist="Line no "+to_string(lines)+": Token <GOTO> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+else { 
+    loglist="Line no "+to_string(lines)+": Token <ELSE> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+while { 
+    loglist="Line no "+to_string(lines)+": Token <WHILE> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+break { 
+    loglist="Line no "+to_string(lines)+": Token <BREAK> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+char { 
+    loglist="Line no "+to_string(lines)+": Token <CHAR> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+double { 
+    loglist="Line no "+to_string(lines)+": Token <DOUBLE> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+return { 
+    loglist="Line no "+to_string(lines)+": Token <RETURN> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+case { 
+    loglist="Line no "+to_string(lines)+": Token <CASE> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+continue { 
+    loglist="Line no "+to_string(lines)+": Token <CONTINUE> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
+
+printf { 
+    loglist="Line no "+to_string(lines)+": Token <PRINTF> Lexeme "+yytext+" found"+"\n"+"\n";
+    yyoutlog<<loglist;
+}
 
 
 {ws} { /* ignore whitespace */ }
@@ -111,6 +169,11 @@ return {
 			yyoutlog<<loglist;
 }
 
+{mulop} {
+			loglist="Line no "+to_string(lines)+": Token <MULOP> Lexeme "+yytext+" found"+"\n"+"\n";
+			yyoutlog<<loglist;
+}
+
 {addop} {
 			loglist="Line no "+to_string(lines)+": Token <ADDOP> Lexeme "+yytext+" found"+"\n"+"\n";
 			yyoutlog<<loglist;
@@ -128,6 +191,11 @@ return {
 
 {logicop} {
 			loglist="Line no "+to_string(lines)+": Token <LOGICOP> Lexeme "+yytext+" found"+"\n"+"\n";
+			yyoutlog<<loglist;
+}
+
+{not} {
+			loglist="Line no "+to_string(lines)+": Token <NOT> Lexeme "+yytext+" found"+"\n"+"\n";
 			yyoutlog<<loglist;
 }
 
