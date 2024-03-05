@@ -77,7 +77,8 @@
      RTHIRD = 293,
      COMMA = 294,
      COLON = 295,
-     SEMICOLON = 296
+     SEMICOLON = 296,
+     LOWER_THAN_ELSE = 297
    };
 #endif
 /* Tokens.  */
@@ -120,6 +121,7 @@
 #define COMMA 294
 #define COLON 295
 #define SEMICOLON 296
+#define LOWER_THAN_ELSE 297
 
 
 
