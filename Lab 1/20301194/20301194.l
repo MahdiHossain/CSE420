@@ -24,7 +24,7 @@ ws [ \t]*
 newline [\n]
 
 /* write regular expressions for letters and digits */
-letter_	 [A-Za-z_] 
+letter_	 [A-Za-z] 
 digit	 [0-9]
 
 /* write regular expressions for id, float and integers */
@@ -56,6 +56,8 @@ semicolon [";"]
 
 %%
 
+
+delim {}
 if { 
     loglist="Line no "+to_string(lines)+": Token <IF> Lexeme "+yytext+" found"+"\n"+"\n";
     yyoutlog<<loglist;
