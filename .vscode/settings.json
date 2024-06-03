@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "ostream": "c",
+        "__hash_table": "c",
+        "__tree": "c",
+        "any": "c",
+        "array": "c",
+        "type_traits": "c",
+        "forward_list": "c",
+        "limits": "c",
+        "ratio": "c",
+        "scoped_allocator": "c",
+        "tuple": "c",
+        "variant": "c"
+    }
+}
